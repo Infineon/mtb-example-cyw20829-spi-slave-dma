@@ -1,6 +1,6 @@
 # AIROC&trade; CYW20829 Bluetooth&reg; LE SoC: SCB SPI slave with DMA
 
-This example demonstrates the use of the SPI Serial Communication Block (SCB) resource for the CYW20829 MCU in slave mode using DMA. The SPI slave toggles the LED depending on the command received by the master.
+This example demonstrates the use of the SPI Serial Communication Block (SCB) resource for the CYW20829/CYW89829 MCU in slave mode using DMA. The SPI slave toggles the LED depending on the command received by the master.
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-cyw20829-spi-slave-dma)
 
@@ -9,9 +9,11 @@ This example demonstrates the use of the SPI Serial Communication Block (SCB) re
 ## Requirements
 
 - [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.0 or later (tested with v3.0)
-- Board support package (BSP) minimum required v1.0.1
+- Board support package (BSP) minimum required:
+- CYW920829M2EVK-02 : v1.0.1
+- CYW989829M2EVB-01 : v1.0.1
 - Programming language: C
-- Associated parts: [AIROC&trade; CYW20829 Bluetooth&reg; LE SoC](https://www.infineon.com/cms/en/product/promopages/airoc20829)
+- Associated parts: [AIROC&trade; CYW20829 Bluetooth&reg; LE SoC](https://www.infineon.com/cms/en/product/promopages/airoc20829),[AIROC&trade; CYW89829 Bluetooth&reg; LE SoC]
 
 ## Supported toolchains (make variable 'TOOLCHAIN')
 
@@ -22,6 +24,7 @@ This example demonstrates the use of the SPI Serial Communication Block (SCB) re
 ## Supported kits (make variable 'TARGET')
 
 - [AIROC&trade; CYW20829 Bluetooth&reg; LE Evaluation Kit](https://www.infineon.com/CYW920829M2EVK-02) (`CYW920829M2EVK-02`) - Default value of `TARGET`
+- [AIROC&trade; CYW89829 Bluetooth&reg; LE evaluation kit] – (`CYW89829M2EVB-01`)
 
 ## Hardware setup
 
@@ -37,6 +40,15 @@ In AIROC&trade; CYW20829 Bluetooth&reg; kit (CYW920829M2EVK-02) the SPI (CS, CLK
  MOSI             | P1[2]      |   J4.6
  MISO             | P1[3]      |   J4.5
  CS               | P1[0]      |   J4.4
+
+In AIROC&trade; CYW89829 Bluetooth&reg; kit (CYW989829M2EVK-01) the SPI (CS, CLK) and User Button2, USER LED1 share the same GPIOs, while you need SPI USER LED1 will be glowing based on SPI CLK activity. The SWD and SPI (MOSI, MISO) interfaces share the same GPIOs and must use one interface at a time. See the table below to make SPI connections:
+
+ SPI signal       | SCB pin    | Header pin
+ :--------------- | :--------- | :---------------
+ SCLK             | P1[1]      |   J7.7
+ MOSI             | P1[2]      |   J6.4
+ MISO             | P1[3]      |   J6.3
+ CS               | P1[0]      |   J6.2
 
 ## Software setup
 
@@ -89,7 +101,7 @@ Argument | Description | Required/optional
 
 <br />
 
-The following example clones the "[SPI DMA Slave](https://github.com/Infineon/mtb-example-cyw20829-spi-slave-dma)" application with the desired name "SPISlaveDMA" configured for the *CYW920829M2EVK-02* BSP into the specified working directory, *C:/mtb_projects*:
+The following example clones the "[SPI DMA Slave](https://github.com/Infineon/mtb-example-cyw20829-spi-slave-dma)" application with the desired name "SPISlaveDMA" configured for the *CYW920829M2EVK-02/CYW89829M2EVB-01* BSP into the specified working directory, *C:/mtb_projects*:
 
    ```
    project-creator-cli --board-id CYW920829M2EVK-02 --app-id mtb-example-cyw20829-spi-slave-dma --user-app-name SPISlaveDMA --target-dir "C:/mtb_projects"
@@ -214,7 +226,7 @@ The Arm&reg; Cortex&reg; CPU controls the slave SPI resource. The slave receives
 Resources  | Links
 -----------|----------------------------------
 Code examples  | [Using ModusToolbox&trade; software](https://github.com/Infineon/Code-Examples-for-ModusToolbox-Software) on GitHub
-Device documentation | [AIROC&trade; CYW20829 Bluetooth&reg; LE SoC](https://www.infineon.com/cms/en/product/promopages/airoc20829)
+Device documentation | [AIROC&trade; CYW20829 Bluetooth&reg; LE SoC](https://www.infineon.com/cms/en/product/promopages/airoc20829) | [AIROC&trade; CYW89829 Bluetooth&reg; LE SoC]
 Development kits | Select your kits from the [Evaluation board finder](https://www.infineon.com/cms/en/design-support/finder-selection-tools/product-finder/evaluation-board)
 Libraries on GitHub | [core-lib](https://github.com/Infineon/core-lib) – Core library <br /> [core-make](https://github.com/Infineon/core-make) – Core GNU make build system <br /> [mtb-hal-cat1](https://github.com/Infineon/mtb-hal-cat1) – Hardware Abstraction Layer (HAL) library <br /> [mtb-pdl-cat1](https://github.com/Infineon/mtb-pdl-cat1) – Peripheral Driver Library (PDL) <br /> [retarget-io](https://github.com/Infineon/retarget-io) – Utility library to retarget STDIO messages to a UART port
 Tools  | [Eclipse IDE for ModusToolbox&trade;](https://www.infineon.com/modustoolbox) – ModusToolbox&trade; software is a collection of easy-to-use software and tools enabling rapid development with Infineon MCUs, covering applications from embedded sense and control to wireless and cloud-connected systems using AIROC&trade; Wi-Fi & Bluetooth&reg; connectivity devices.
@@ -227,11 +239,12 @@ Infineon provides a wealth of data at www.infineon.com to help you select the ri
 
 ## Document history
 
-Document title: *CE238555* – *AIROC&trade; CYW20829 Bluetooth&reg; LE SoC: SCB SPI slave with DMA*
+Document title: *CE238555* – *AIROC&trade; CYW20829 Bluetooth&reg; CYW89829 Bluetooth&reg; LE SoC: SCB SPI slave with DMA*
 
  Version | Description of change
  ------- | ---------------------
  1.0.0   | New code example
+ 1.1.0   | Add kit CYW89829M2EVB-01.
 
 <br>
 
