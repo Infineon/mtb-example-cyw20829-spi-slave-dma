@@ -8,12 +8,13 @@ This example demonstrates the use of the SPI Serial Communication Block (SCB) re
 
 ## Requirements
 
-- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.0 or later (tested with v3.0)
+- [ModusToolbox&trade;](https://www.infineon.com/modustoolbox) v3.2 or later (tested with v3.2)
 - Board support package (BSP) minimum required:
 - CYW920829M2EVK-02 : v1.0.1
-- CYW989829M2EVB-01 : v1.0.1
+- CYW989829M2EVB-01 : v1.0.4
+- CYW989829M2EVB-03 : v1.0.4
 - Programming language: C
-- Associated parts: [AIROC&trade; CYW20829 Bluetooth&reg; LE SoC](https://www.infineon.com/cms/en/product/promopages/airoc20829),[AIROC&trade; CYW89829 Bluetooth&reg; LE SoC]
+- Associated parts: [AIROC&trade; CYW20829 Bluetooth&reg; LE SoC](https://www.infineon.com/cms/en/product/promopages/airoc20829),AIROC&trade; CYW89829 Bluetooth&reg; LE SoC
 
 ## Supported toolchains (make variable 'TOOLCHAIN')
 
@@ -24,7 +25,7 @@ This example demonstrates the use of the SPI Serial Communication Block (SCB) re
 ## Supported kits (make variable 'TARGET')
 
 - [AIROC&trade; CYW20829 Bluetooth&reg; LE Evaluation Kit](https://www.infineon.com/CYW920829M2EVK-02) (`CYW920829M2EVK-02`) - Default value of `TARGET`
-- [AIROC&trade; CYW89829 Bluetooth&reg; LE evaluation kit] – (`CYW89829M2EVB-01`)
+- AIROC&trade; CYW89829 Bluetooth&reg; LE evaluation kit – (`CYW989829M2EVB-01`,`CYW989829M2EVB-03`)
 
 ## Hardware setup
 
@@ -32,7 +33,7 @@ This example uses the board's default configuration. See the kit user guide to e
 
 **Note:** The AIROC&trade; CYW20829 Bluetooth&reg; Kit (CYW920829M2EVK-02) ships with KitProg3 version 2.21 installed. The ModusToolbox&trade; requires KitProg3 with the latest version 2.40. Before using this code example, make sure that the board is upgraded to KitProg3. The tool and instructions are available in the [Firmware Loader](https://github.com/Infineon/Firmware-loader) GitHub repository. If you do not upgrade, you will see an error such as "unable to find CMSIS-DAP device" or "KitProg firmware is out of date".
 
-In AIROC&trade; CYW20829 Bluetooth&reg; kit (CYW920829M2EVK-02) the SPI (CS, CLK) and User Button2, USER LED1 share the same GPIOs, while you need SPI USER LED1 will be glowing based on SPI CLK activity. The SWD and SPI (MOSI, MISO) interfaces share the same GPIOs and must use one interface at a time. See the table below to make SPI connections:
+In AIROC&trade; CYW20829 Bluetooth&reg; kit (CYW920829M2EVK-02,CYW989829M2EVB-03) the SPI (CS, CLK) and User Button2, USER LED1 share the same GPIOs, while you need SPI USER LED1 will be glowing based on SPI CLK activity. The SWD and SPI (MOSI, MISO) interfaces share the same GPIOs and must use one interface at a time. See the table below to make SPI connections:
 
  SPI signal       | SCB pin    | Header pin
  :--------------- | :--------- | :---------------
@@ -41,7 +42,7 @@ In AIROC&trade; CYW20829 Bluetooth&reg; kit (CYW920829M2EVK-02) the SPI (CS, CLK
  MISO             | P1[3]      |   J4.5
  CS               | P1[0]      |   J4.4
 
-In AIROC&trade; CYW89829 Bluetooth&reg; kit (CYW989829M2EVK-01) the SPI (CS, CLK) and User Button2, USER LED1 share the same GPIOs, while you need SPI USER LED1 will be glowing based on SPI CLK activity. The SWD and SPI (MOSI, MISO) interfaces share the same GPIOs and must use one interface at a time. See the table below to make SPI connections:
+In AIROC&trade; CYW89829 Bluetooth&reg; kit (CYW989829M2EVB-01) the SPI (CS, CLK) and User Button2, USER LED1 share the same GPIOs, while you need SPI USER LED1 will be glowing based on SPI CLK activity. The SWD and SPI (MOSI, MISO) interfaces share the same GPIOs and must use one interface at a time. See the table below to make SPI connections:
 
  SPI signal       | SCB pin    | Header pin
  :--------------- | :--------- | :---------------
@@ -101,7 +102,7 @@ Argument | Description | Required/optional
 
 <br />
 
-The following example clones the "[SPI DMA Slave](https://github.com/Infineon/mtb-example-cyw20829-spi-slave-dma)" application with the desired name "SPISlaveDMA" configured for the *CYW920829M2EVK-02/CYW89829M2EVB-01* BSP into the specified working directory, *C:/mtb_projects*:
+The following example clones the "[SPI DMA Slave](https://github.com/Infineon/mtb-example-cyw20829-spi-slave-dma)" application with the desired name "SPISlaveDMA" configured for the *CYW920829M2EVK-02/CYW989829M2EVB-01/CYW989829M2EVB-03* BSP into the specified working directory, *C:/mtb_projects*:
 
    ```
    project-creator-cli --board-id CYW920829M2EVK-02 --app-id mtb-example-cyw20829-spi-slave-dma --user-app-name SPISlaveDMA --target-dir "C:/mtb_projects"
@@ -195,6 +196,8 @@ For a list of supported IDEs and more details, see the "Exporting to IDEs" secti
 
 5. After successful connection with the master, the LED blinks every second. Confirm that the UART terminal displays the following.
 
+**Note:** For CYW989829M2EVB-03 board, use Blue LED to blink.
+
    **Figure 2. Terminal output after successful connection**
 
    ![](images/output2.png)
@@ -244,7 +247,8 @@ Document title: *CE238555* – *AIROC&trade; CYW20829 Bluetooth&reg; CYW89829 Bl
  Version | Description of change
  ------- | ---------------------
  1.0.0   | New code example
- 1.1.0   | Add kit CYW89829M2EVB-01.
+ 1.1.0   | Add kit CYW989829M2EVB-01.
+ 1.2.0   | Updated device mpn of CYW989829M2EVB-01 and added support for CYW989829M2EVB-03.
 
 <br>
 
